@@ -19,7 +19,7 @@ METRICS_PATH="tests.performance.jmeter.yourprojectorproductname.responsetime."+s
                         Socket socket = new Socket(GRAPHITE_HOST,CARBON_PORT);
                         OutputStream s = socket.getOutputStream();
                         PrintWriter pr = new PrintWriter(s, true);
-//                      log.info(METRICS_PATH+" "+sampleResult.getTime().toString()+" "+System.currentTimeMillis()/1000+"\n");
+                        log.info(METRICS_PATH+" "+sampleResult.getTime().toString()+" "+System.currentTimeMillis()/1000+"\n");
         
                         pr.print(METRICS_PATH+" "+sampleResult.getTime().toString()+" "+System.currentTimeMillis()/1000+"\n");
 
