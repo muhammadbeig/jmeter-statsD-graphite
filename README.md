@@ -1,9 +1,9 @@
 # jmeter-graphite
-# This JSR223 listener for Jmeter pushes jmeter sampler response times to graphite
+This JSR223 listener for Jmeter pushes jmeter sampler response times to graphite
 
 
-# Create a JSR223 listener in jmeter with the following code and place it at a level to listen from all samplers whose response time is required to be pushed to graphite.
-# The following code goes to the JSR223 listener:
+Create a JSR223 listener in jmeter with the following code and place it at a level to listen from all samplers whose response time is required to be pushed to graphite.
+The following code goes to the JSR223 listener:
 
 import java.io.IOException;
 import java.io.OutputStream;
