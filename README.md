@@ -31,3 +31,37 @@ METRICS_PATH="tests.performance.jmeter.yourprojectorproductname.responsetime."+s
                 } catch (IOException e) {
                         throw new GraphiteException("Error while writing data to graphite: " + e.getMessage(), e);
                 }
+
+The following piece of code sends metrics (response time statsD "timer" and error code statsD "counter" to graphite through statsD. It uses the UDP port that statsD listens in and hence is more scalable.
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+if ("${enablegraphitelogging}"=="Y" || "${enablegraphitelogging}"=="y")
+{
+
+GRAPHITEHOST="${graphitehost}";
+PREFIX="${graphiteprefix}"+sampleResult.toString();
+
+		try {
+
+
+			host=InetAddress.getByName("${graphitehost}");
+			String mystr=PREFIX+":"+sampleResult.getTime().toString()+"|ms\r\n"+PREFIX+".responsecode_"+sampleResult.getResponseCode()+":1|c";
+
+			byte[] message = mystr.getBytes();
+			DatagramPacket packet = new DatagramPacket(message, message.length,host, 8125);
+			
+			DatagramSocket dsocket = new DatagramSocket();
+      		dsocket.send(packet);
+      		dsocket.close();
+		} catch (UnknownHostException e) {
+			throw new GraphiteException("Unknown host: " + host);
+
+		} catch (IOException e) {
+			throw new GraphiteException("Error while writing data to statsD socket: " + e.getMessage(), e);
+		}
+}
