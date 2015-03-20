@@ -32,7 +32,7 @@ METRICS_PATH="tests.performance.jmeter.yourprojectorproductname.responsetime."+s
                         throw new GraphiteException("Error while writing data to graphite: " + e.getMessage(), e);
                 }
 
-The following piece of code sends metrics (response time statsD "timer" and error code statsD "counter" to graphite through statsD. It uses the UDP port that statsD listens in and hence is more scalable.
+The following piece of code (in a JSR223 listener in JMeter) sends metrics (response time statsD "timer" and error code statsD "counter" to graphite through statsD. It uses the UDP port that statsD listens in and hence is more scalable.
 
 
 GRAPHITEHOST="${graphitehost}";
