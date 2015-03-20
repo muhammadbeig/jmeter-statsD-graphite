@@ -34,14 +34,6 @@ METRICS_PATH="tests.performance.jmeter.yourprojectorproductname.responsetime."+s
 
 The following piece of code sends metrics (response time statsD "timer" and error code statsD "counter" to graphite through statsD. It uses the UDP port that statsD listens in and hence is more scalable.
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
-if ("${enablegraphitelogging}"=="Y" || "${enablegraphitelogging}"=="y")
-{
 
 GRAPHITEHOST="${graphitehost}";
 PREFIX="${graphiteprefix}"+sampleResult.toString();
@@ -64,4 +56,3 @@ PREFIX="${graphiteprefix}"+sampleResult.toString();
 		} catch (IOException e) {
 			throw new GraphiteException("Error while writing data to statsD socket: " + e.getMessage(), e);
 		}
-}
